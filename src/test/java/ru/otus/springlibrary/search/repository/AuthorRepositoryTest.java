@@ -10,7 +10,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import ru.otus.springlibrary.search.domain.Author;
-import ru.otus.springlibrary.search.domain.Genre;
 
 @RunWith(SpringRunner.class)
 @DataMongoTest

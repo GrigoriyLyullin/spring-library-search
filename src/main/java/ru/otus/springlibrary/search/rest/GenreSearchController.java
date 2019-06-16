@@ -1,5 +1,6 @@
 package ru.otus.springlibrary.search.rest;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +8,7 @@ import reactor.core.publisher.Flux;
 import ru.otus.springlibrary.search.dto.GenreDTO;
 import ru.otus.springlibrary.search.repository.GenreRepository;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class GenreSearchController {
 

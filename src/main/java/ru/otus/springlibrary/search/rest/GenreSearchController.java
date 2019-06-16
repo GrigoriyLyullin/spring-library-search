@@ -16,12 +16,12 @@ public class GenreSearchController {
         this.repository = repository;
     }
 
-    @GetMapping("/genre")
+    @GetMapping("/genres")
     public Flux<GenreDTO> all() {
         return repository.findAll().map(g -> new GenreDTO(g.getId().toString(), g.getGenre()));
     }
 
-    @GetMapping("/genre/searchByGenre")
+    @GetMapping("/genres/searchByGenre")
     public Flux<GenreDTO> byName(@RequestParam("genre") String genre) {
         return repository.findTop5ByGenreContainingIgnoreCase(genre).map(g -> new GenreDTO(g.getId().toString(), g.getGenre()));
     }

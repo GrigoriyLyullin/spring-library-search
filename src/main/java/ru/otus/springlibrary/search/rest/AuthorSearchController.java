@@ -16,12 +16,12 @@ public class AuthorSearchController {
         this.repository = repository;
     }
 
-    @GetMapping("/author")
+    @GetMapping("/authors")
     public Flux<AuthorDTO> all() {
         return repository.findAll().map(a -> new AuthorDTO(a.getId().toString(), a.getFullName()));
     }
 
-    @GetMapping("/author/searchByName")
+    @GetMapping("/authors/searchByName")
     public Flux<AuthorDTO> byName(@RequestParam("name") String name) {
         return repository.findTop5ByFullNameContainingIgnoreCase(name)
                 .map(a -> new AuthorDTO(a.getId().toString(), a.getFullName()));

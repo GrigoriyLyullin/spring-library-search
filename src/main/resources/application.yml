@@ -6,3 +6,6 @@ spring:
   jackson:
     serialization:
       INDENT_OUTPUT: true
+logging:
+  level:
+    com.netflix.hystrix: DEBUG

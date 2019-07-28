@@ -20,7 +20,7 @@ public class GenreService {
 
     private GenreRepository genreRepository;
 
-    @HystrixCommand(fallbackMethod = "getDefaultGenres", groupKey = "SpringLibraryGenre", commandKey = "findAll")
+    @HystrixCommand(fallbackMethod = "getDefaultGenres", commandKey = "findAll")
     public List<Genre> findAll() {
         List<Genre> genres = genreBlockingRepository.findAll();
         System.out.println("genres.isEmpty(): " + genres.isEmpty());

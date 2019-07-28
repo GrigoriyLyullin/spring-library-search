@@ -21,7 +21,7 @@ public class AuthorService {
 
     private AuthorRepository authorRepository;
 
-    @HystrixCommand(fallbackMethod = "getDefaultAuthors")
+    @HystrixCommand(fallbackMethod = "getDefaultAuthors", commandKey = "findAll")
     public List<Author> findAll() {
         List<Author> authors = authorBlockingRepository.findAll();
         System.out.println("authors.isEmpty(): " + authors.isEmpty());

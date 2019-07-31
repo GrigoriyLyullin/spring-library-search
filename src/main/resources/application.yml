@@ -6,3 +6,16 @@ spring:
   jackson:
     serialization:
       INDENT_OUTPUT: true
+logging:
+  level:
+    com.netflix.hystrix: DEBUG
+# otherwise hystrix is too fast and don't want to wait data from remote mongo db
+# https://jira.mongodb.org/browse/JAVA-2172
+# https://github.com/Netflix/Hystrix/wiki/Configuration#executionisolationthreadtimeoutinmilliseconds
+hystrix:
+  command:
+    findAll:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

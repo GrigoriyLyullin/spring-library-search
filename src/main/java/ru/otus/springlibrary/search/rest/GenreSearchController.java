@@ -1,30 +1,35 @@
 package ru.otus.springlibrary.search.rest;
 
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import ru.otus.springlibrary.search.dto.GenreDTO;
-import ru.otus.springlibrary.search.repository.GenreRepository;
+import ru.otus.springlibrary.search.service.GenreService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
+@AllArgsConstructor
 public class GenreSearchController {
 
-    private GenreRepository repository;
-
-    public GenreSearchController(GenreRepository repository) {
-        this.repository = repository;
-    }
+    private GenreService genreService;
 
     @GetMapping("/genres")
-    public Flux<GenreDTO> all() {
-        return repository.findAll().map(g -> new GenreDTO(g.getId().toString(), g.getGenre()));
+    public List<GenreDTO> all() {
+        return genreService.findAll()
+                .stream()
+                .map(g -> new GenreDTO(g.getId().toString(), g.getGenre()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/genres/searchByGenre")
     public Flux<GenreDTO> byName(@RequestParam("genre") String genre) {
-        return repository.findTop5ByGenreContainingIgnoreCase(genre).map(g -> new GenreDTO(g.getId().toString(), g.getGenre()));
+        return genreService.findTop5ByGenreContainingIgnoreCase(genre)
+                .map(g -> new GenreDTO(g.getId().toString(), g.getGenre()));
     }
 }
